@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Unbounded:wght@700;800&display=swap');
+
+:root{
+    --tinta: #0b3a26;
+    --verde: #34d27b;
+    --verde-medio: #1f8f56;
+    --menta: #d9f3e3;
+    --menta-suave: #f0faf4;
+    --papel: #f6fbf8;
+    --texto-suave: #2f5d46;
+    --perigo: #ff9188;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+    color: var(--tinta);
+    background-color: var(--papel);
+    background-image: radial-gradient(#b7dec6 1.4px, transparent 1.5px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+    padding: 28px 16px 56px;
+}
+
+/* ---------- Folha principal ---------- */
+
+.container{
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-areas:
+        "titulo titulo perfil"
+        "form   resumo resumo"
+        "form   busca  busca"
+        "form   tabela tabela"
+        "form   vazia  vazia"
+        "form   .      .";
+    max-width: 1040px;
+    margin: 24px auto;
+    background-color: #ffffff;
+    border: 3px solid var(--tinta);
+    border-radius: 10px;
+    box-shadow: 10px 10px 0 var(--verde);
+    overflow: hidden;
+}
+
+/* faixa escura que fica atrás do título e do perfil */
+.container::before{
+    content: "";
+    grid-area: 1 / 1 / 2 / 4;
+    background:
+        linear-gradient(to top, var(--verde) 0 9px, transparent 9px),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0 14px, transparent 14px 28px),
+        var(--tinta);
+}
+
+h1{
+    grid-area: titulo;
+    align-self: center;
+    font-family: "Unbounded", "Hanken Grotesk", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(24px, 3.6vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 var(--verde-medio);
+    padding: 30px 28px 40px;
+}
+
+/* ---------- Perfil: crachá pendurado na faixa do título ---------- */
+
+.perfil-container{
+    grid-area: perfil;
+    position: relative;
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 22px 28px 32px 0;
+    padding: 14px 18px;
+    background-color: #ffffff;
+    border: 3px solid var(--tinta);
+    border-radius: 12px;
+    box-shadow: 5px 5px 0 var(--verde);
+    transform: rotate(2.5deg);
+    transform-origin: 50% 0;
+    animation: balanco 1.4s ease-out 0.2s both;
+}
+
+.perfil-container::before{
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 46px;
+    height: 12px;
+    margin-left: -23px;
+    background-color: var(--verde);
+    border: 2px solid var(--tinta);
+    border-radius: 99px;
+}
+
+@keyframes balanco{
+    0%   { transform: rotate(14deg); }
+    35%  { transform: rotate(-6deg); }
+    60%  { transform: rotate(5deg); }
+    80%  { transform: rotate(1deg); }
+    100% { transform: rotate(2.5deg); }
+}
+
+.foto-perfil{
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 3px solid var(--tinta);
+}
+
+.perfil-texto h2{
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 6px 0;
+}
+
+.perfil-texto p{
+    width: fit-content;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--tinta);
+    background-color: var(--menta);
+    border: 1.5px solid var(--tinta);
+    border-radius: 99px;
+    padding: 2px 10px;
+    margin: 0;
+}
+
+/* ---------- Formulário ---------- */
+
+form{
+    grid-area: form;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 28px 24px 30px;
+    background-color: var(--menta);
+    background-image: radial-gradient(rgba(11, 58, 38, 0.13) 1.2px, transparent 1.3px);
+    background-size: 18px 18px;
+    border-right: 3px solid var(--tinta);
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+}
+
+label{
+    font-weight: 700;
+    font-size: 14px;
+}
+
+input{
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--tinta);
+    padding: 11px 12px;
+    background-color: #ffffff;
+    border: 2px solid var(--tinta);
+    border-radius: 4px;
+}
+
+input::placeholder{
+    color: #5f8571;
+}
+
+input:focus{
+    outline: 3px solid var(--verde);
+    outline-offset: 2px;
+}
+
+/* ---------- Botões ---------- */
+
+button{
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--tinta);
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 2px solid var(--tinta);
+    border-radius: 6px;
+    box-shadow: 4px 4px 0 var(--tinta);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
+}
+
+button:hover{
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--tinta);
+}
+
+button:active{
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--tinta);
+}
+
+button:focus-visible{
+    outline: 3px solid var(--verde);
+    outline-offset: 3px;
+}
+
+.btn-primary{
+    background-color: var(--verde);
+    padding: 14px 16px;
+    font-size: 16px;
+}
+
+.btn-danger{
+    background-color: var(--perigo);
+}
+
+/* ---------- Total, busca e tabela ---------- */
+
+.resumo-container{
+    grid-area: resumo;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 28px 28px 24px;
+}
+
+#total-estoque{
+    font-size: 19px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: #ffffff;
+    padding: 12px 18px;
+    background-color: var(--tinta);
+    border: 2px solid var(--tinta);
+    border-radius: 6px;
+    box-shadow: 5px 5px 0 var(--verde);
+}
+
+#campo-busca{
+    grid-area: busca;
+    padding: 0 28px;
+    margin: 0 0 22px 0;
+}
+
+#busca{
+    padding-left: 42px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b3a26' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M16 16l5 5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 13px center;
+    background-size: 18px;
+}
+
+table{
+    grid-area: tabela;
+    align-self: start;
+    width: calc(100% - 56px);
+    margin: 0 28px 28px;
+    border-collapse: collapse;
+    border: 2px solid var(--tinta);
+    font-variant-numeric: tabular-nums;
+}
+
+th,td{
+    padding: 12px 14px;
+    text-align: left;
+}
+
+th:nth-child(n+2),
+td:nth-child(n+2){
+    text-align: right;
+}
+
+th{
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: var(--tinta);
+    border-bottom: 4px solid var(--verde);
+}
+
+td{
+    border-top: 1px solid #cfe9d8;
+}
+
+td:first-child{
+    font-weight: 700;
+}
+
+td:nth-child(4){
+    font-weight: 700;
+}
+
+td:nth-child(5){
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even){
+    background-color: var(--menta-suave);
+}
+
+tbody tr:hover{
+    background-color: var(--menta);
+}
+
+tbody tr:hover td:first-child{
+    box-shadow: inset 6px 0 0 var(--verde);
+}
+
+.btn-editar,
+.btn-remover{
+    padding: 6px 10px;
+    font-size: 12.5px;
+    box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.btn-editar:hover,
+.btn-remover:hover{
+    box-shadow: 4px 4px 0 var(--tinta);
+}
+
+.btn-editar{
+    margin-right: 6px;
+}
+
+.btn-editar:hover{
+    background-color: var(--verde);
+}
+
+.btn-remover{
+    background-color: var(--perigo);
+}
+
+.mensagem-vazia{
+    grid-area: vazia;
+    margin: 0 28px 28px;
+    padding: 22px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--texto-suave);
+    background-color: var(--menta-suave);
+    border: 2px dashed var(--tinta);
+    border-radius: 6px;
+}
+
+/* ---------- Telas menores ---------- */
+
+@media (max-width: 820px){
+    .container{
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        grid-template-areas:
+            "titulo"
+            "perfil"
+            "form"
+            "resumo"
+            "busca"
+            "tabela"
+            "vazia";
+        box-shadow: 6px 6px 0 var(--verde);
+    }
+
+    .container::before{
+        grid-area: 1 / 1 / 3 / 2;
+    }
+
+    h1{
+        padding: 26px 20px 10px;
+    }
+
+    .perfil-container{
+        justify-self: start;
+        margin: 22px 20px 34px;
+    }
+
+    form{
+        border-right: none;
+        border-bottom: 3px solid var(--tinta);
+    }
+}
+
+@media (max-width: 560px){
+    .resumo-container,
+    #campo-busca{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    table{
+        width: calc(100% - 32px);
+        margin: 0 16px 24px;
+        font-size: 14px;
+    }
+
+    .mensagem-vazia{
+        margin: 0 16px 24px;
+    }
+
+    th,td{
+        padding: 10px 8px;
+    }
+
+    .btn-editar,
+    .btn-remover{
+        display: block;
+        width: 100%;
+        margin: 0 0 8px;
+    }
+
+    .btn-remover{
+        margin-bottom: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .perfil-container{
+        animation: none;
+    }
+
+    button{
+        transition: none;
+    }
+
+    button:hover,
+    button:active{
+        transform: none;
+    }
+}
