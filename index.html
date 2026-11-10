@@ -10,10 +10,12 @@
     <div class="container">
         <h1>Cadastro de Produtos</h1>
 
+        <button type="button" id="btn-bootstrap" class="btn-bootstrap">Ver Conceito Bootstrap</button>
+
         <div class="perfil-container">
             <img src="foto-perfil.jpg" alt="Foto de Perfil" class="foto-perfil">
             <div class="perfil-texto">
-              <h2>João vitor </h2>
+              <h2>João vitor maltaca leal</h2>
               <p>2A DS - Sesi Senai</p>
             </div>
           </div>
@@ -33,6 +35,8 @@
                 <label for="quantidade">Quantidade:</label>
                 <input type="number" id="quantidade" placeholder="Ex. 5" required />
             </div>
+
+            <div id="mensagem-erro" class="mensagem-erro" role="alert" hidden></div>
 
             <button type="submit" class="btn-primary">Adicionar Produto</button>
         </form>
@@ -61,6 +65,29 @@
             </tbody>
           </table>
           <p id="mensagem-vazia" class="mensagem-vazia" style="display: none;">Nenhum produto encontrado.</p>
+    </div>
+
+    <!-- Modal de confirmação customizado -->
+    <div id="modal-confirmacao" class="modal-overlay" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-texto">
+            <h2 id="modal-titulo">Confirmar ação</h2>
+            <p id="modal-texto"></p>
+            <div class="modal-botoes">
+                <button type="button" id="modal-cancelar" class="btn-secundario">Cancelar</button>
+                <button type="button" id="modal-confirmar" class="btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal "Conceito Bootstrap" (conteúdo montado pelo JavaScript) -->
+    <div id="modal-bootstrap" class="modal-overlay" hidden>
+        <div class="modal modal-grande" role="dialog" aria-modal="true" aria-labelledby="bootstrap-titulo">
+            <h2 id="bootstrap-titulo">Conceito Bootstrap</h2>
+            <div id="bootstrap-conteudo"></div>
+            <div class="modal-botoes">
+                <button type="button" id="bootstrap-fechar" class="btn-fechar">Fechar</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
